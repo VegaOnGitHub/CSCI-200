@@ -126,28 +126,32 @@ string string_third_word(const string STR)  {
 
 string string_nth_word(const string STR, const int N) {
     string result = STR;
-    if (N <= 0){
+    if (N <= 0) {
         return "";
     }
-    size_t start = 0, end = 0;
+
+    if (STR.empty()) {
+        return "";
+    }
+
+    size_t start = 0;
+    size_t end = 0;
     int count = 0;
-    while (start != string::npos){
+
+    while (start < STR.size()) {
         end = STR.find(' ', start);
+        if (end == string::npos) {
+            end = STR.size();
+        }
         count++;
         if (count == N) {
-            if (end == string::npos){
-                return STR.substr(start);
-            }
-            else{
-                return STR.substr(start, end - start);
-            }
-            if (end == string::npos){
-                break;
-            }
-        start = end + 1;
+            return STR.substr(start, end - start);
         }
-        return "";
+        start = end + 1;
     }
+
+    return "";
+}
     // TODO 11: set result to be the nth word from the string
     std::cout << "TODO: implement string_nth_word(\"" << STR << "\", " << N << ")" << std::endl;
     return result;
