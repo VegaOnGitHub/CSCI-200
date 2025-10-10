@@ -11,7 +11,7 @@ size_t string_length(const string STR)  {
 }
 
 char string_char_at(const string STR, const size_t IDX) {
-    char result = '\0';
+    char result = STR.at(IDX);
     // TODO 01: set result to the character of a string at a given index
     std::cout << "TODO: implement string_char_at(\"" << STR << "\", " << IDX << ")" << std::endl;
     return result;
