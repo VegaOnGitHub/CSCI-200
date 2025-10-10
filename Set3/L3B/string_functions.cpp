@@ -126,9 +126,9 @@ string string_third_word(const string STR)  {
 
 string string_nth_word(const string STR, const int N)  {
     string result = STR;
-    if (N <= 0)
+    if (N <= 0){
         return "";
-
+    }
     size_t start = 0, end = 0;
     int count = 0;
     while (count < N && start != string::npos) {
@@ -168,7 +168,9 @@ vector<string> string_tokenize(const string STR, const char DELIMINATOR) {
 string string_substitute(const string STR, const char TARGET, const char REPLACEMENT)  {
     string result = STR;
     for (size_t i = 0; i < result.size(); i++){
-        result[i] = toupper(result[i]);
+        if (result[i] == TARGET){
+            result[i] = REPLACEMENT;
+        }
     }
     // TODO 13: set result to be the string with all instances of TARGET replaced
     std::cout << "TODO: implement string_substitute(\"" << STR << "\", '" << TARGET << "', '" << REPLACEMENT << "')" << std::endl;
@@ -205,7 +207,7 @@ int string_compare(const string LHS, const string RHS) {
     } else {
         result = 0;
     }
-    
+
     // TODO 16: compare LHS and RHS
     std::cout << "TODO: implement string_compare(\"" << LHS << "\", \"" << RHS << "\")" << std::endl;
     return result;
