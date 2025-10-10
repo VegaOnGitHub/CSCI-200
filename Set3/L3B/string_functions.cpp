@@ -46,7 +46,7 @@ string string_substring(const string STR, const size_t IDX, const size_t LEN) {
 }
 
 string string_replace(const string STR, const string TEXT_TO_REPLACE, const string REPLACE_WITH) {
-    string result = STR.replace(STR.at(TEXT_TO_REPLACE), STR.length(TEXT_TO_REPLACE), REPLACE_WITH);
+    string result = STR.replace(STR.find(TEXT_TO_REPLACE), TEXT_TO_REPLACE.length(),  REPLACE_WITH);
     // TODO 06: set result to be the string with the given text replaced
     std::cout << "TODO: implement string_replace(\"" << STR << "\", \"" << TEXT_TO_REPLACE << "\", \"" << REPLACE_WITH << ")\"" << std::endl;
     return result;
