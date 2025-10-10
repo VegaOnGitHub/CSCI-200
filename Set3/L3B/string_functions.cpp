@@ -151,7 +151,7 @@ string string_nth_word(const string STR, const int N) {
     }
 
     return "";
-}
+
     // TODO 11: set result to be the nth word from the string
     std::cout << "TODO: implement string_nth_word(\"" << STR << "\", " << N << ")" << std::endl;
     return result;
