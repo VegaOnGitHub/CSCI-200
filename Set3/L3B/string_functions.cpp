@@ -136,18 +136,17 @@ string string_nth_word(const string STR, const int N) {
         count++;
         if (count == N) {
             if (end == string::npos){
-                result = STR.substr(start);
-                return result;
+                return STR.substr(start);
             }
             else{
-                result = STR.substr(start, end - start);
-                return result;
+                return STR.substr(start, end - start);
             }
             if (end == string::npos){
                 break;
             }
         start = end + 1;
         }
+        return "";
     }
     // TODO 11: set result to be the nth word from the string
     std::cout << "TODO: implement string_nth_word(\"" << STR << "\", " << N << ")" << std::endl;
