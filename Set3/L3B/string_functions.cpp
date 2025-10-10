@@ -18,35 +18,35 @@ char string_char_at(const string STR, const size_t IDX) {
 }
 
 string string_append(const string LEFT, const string RIGHT)  {
-    string result = LEFT;
+    string result = LEFT + ' ' + RIGHT
     // TODO 02: set result to the concatenation of strings LEFT and RIGHT
     std::cout << "TODO: implement string_append(\"" << LEFT << "\", \"" << RIGHT << "\")" << std::endl;
     return result;
 }
 
 string string_insert(const string STR, const string TO_INSERT, const size_t IDX) {
-    string result = STR;
+    string result = STR[IDX].insert(TO_INSERT)
     // TODO 03: set result to the result of inserting a string into another
     std::cout << "TODO: implement string_insert(\"" << STR << "\", \"" << TO_INSERT << "\", " << IDX << ")" << std::endl;
     return result;
 }
 
 size_t string_find(const string STR, const char C)  {
-    size_t result = 0;
+    size_t result = STR.find(C);
     // TODO 04: set result to the index of the first occurrence of the character
     std::cout << "TODO: implement string_find(\"" << STR << "\", '" << C << "')" << std::endl;
     return result;
 }
 
 string string_substring(const string STR, const size_t IDX, const size_t LEN) {
-    string result = STR;
+    string result = STR.substr(IDX, LEN);
     // TODO 05: set result to be a substring starting at index of given length
     std::cout << "TODO: implement string_substring(\"" << STR << "\", " << IDX << ", " << LEN << ")" << std::endl;
     return result;
 }
 
 string string_replace(const string STR, const string TEXT_TO_REPLACE, const string REPLACE_WITH) {
-    string result = STR;
+    string result = STR.replace(STR.at(TEXT_TO_REPLACE), STR.length(TEXT_TO_REPLACE), REPLACE_WITH);
     // TODO 06: set result to be the string with the given text replaced
     std::cout << "TODO: implement string_replace(\"" << STR << "\", \"" << TEXT_TO_REPLACE << "\", \"" << REPLACE_WITH << ")\"" << std::endl;
     return result;
