@@ -1,0 +1,4 @@
+#ifndef OUTPUTPROCESSOR_H
+#define OUTPUTPROCESSOR_H
+
+#endif
