@@ -1,16 +1,14 @@
 #include "Warehouse.h"
-template<typename T>
 
 using namespace std;
 
 Warehouse::Warehouse() {
-    _pBoxen = new vector<T*>;
+    _pBoxen = new vector<Box*>;
     _warehouseLetter = '?';
 }
 
-template<typename T>
 Warehouse::Warehouse(const Warehouse& WH) {
-    _pBoxen = new vector<T*>; 
+    _pBoxen = new vector<Box*>; 
     for (Box* b : *WH._pBoxen) {
         _pBoxen->push_back(new Box(*b));
     }
