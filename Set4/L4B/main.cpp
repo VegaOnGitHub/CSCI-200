@@ -8,8 +8,8 @@ int main() {
   cout << "Made Warehouse H with 2 boxes" << endl;
   Warehouse<Box> warehouseH;
   warehouseH.setWarehouseLetter('H');
-  warehouseH.store( T(4) );
-  warehouseH.store( T(2) );
+  warehouseH.store( Box(4) );
+  warehouseH.store( Box(2) );
   cout << warehouseH << endl;
 
   cout << endl << "Setting Box 0 to size 5" << endl;

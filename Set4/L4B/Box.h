@@ -1,14 +1,12 @@
 #ifndef BOX_H
 #define BOX_H
 
-template<typename T>
 #include <ostream>
 
 /**
  * @brief Stores the size of a Box
  * 
  */
-template<typename T>
 class Box {
 public: // we'll explain momentarily
     /**
@@ -25,8 +23,7 @@ public: // we'll explain momentarily
      * 
      * @param SIZE size of the Box
      */
-    template<typename T>
-    Box(const T SIZE); // parameterized constructor
+    Box(const double SIZE); // parameterized constructor
 
     /**
      * @brief Get the Size of the Box
@@ -40,14 +37,14 @@ public: // we'll explain momentarily
      * 
      * @param SIZE size to set on Box
      */
-    void setBoxSize(const double T);// mutator - setter
+    void setBoxSize(const double SIZE);// mutator - setter
 
 private:    
     /**
      * @brief current Box size
      * 
      */
-    T _size;
+    double _size;
 };
 
 std::ostream& operator<<(std::ostream&, const Box&);

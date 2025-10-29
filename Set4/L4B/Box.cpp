@@ -5,8 +5,7 @@ Box::Box() {
     _size = 1.0;
 }
 
-template<typename T>
-Box::Box(const double T) {
+Box::Box(const double SIZE) {
     // if desired size is positive, assign
     if(SIZE > 0) _size = SIZE;
     // otherwise default to one
@@ -16,8 +15,7 @@ Box::Box(const double T) {
 double Box::getBoxSize() const {
     return _size;
 }
-
-void Box::setBoxSize(const T SIZE) {
+void Box::setBoxSize(const double SIZE) {
     // if desired size is positive, assign
     if(SIZE > 0) _size = SIZE;
 }

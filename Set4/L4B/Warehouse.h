@@ -9,7 +9,6 @@
 /**
  * @brief takes in things and puts them into a list.  stores all the items internally
  */
-template<typename T>
 class Warehouse {
 public:
     /**
@@ -33,14 +32,14 @@ public:
      * @brief puts the item into the warhouse
      * @param ITEM item to store
      */
-    void store(const T ITEM);
+    void store(const int ITEM);
 
     /**
      * @brief Get the item at given position with the warehouse
      * @param ITEM_POS position to retrieve
      * @return Box& corresponding item
      */
-    T& retrieve(const size_t ITEM_POS) const;
+    Box& retrieve(const size_t ITEM_POS) const;
 
     /**
      * @brief Get the Number Of items
@@ -62,7 +61,7 @@ private:
      * @brief holds a list of pointers to Boxes
      * 
      */
-    std::vector<T*>* _pItems;
+    std::vector<Box*>* _pItems;
     /**
      * @brief Warehouse letter identifier
      */

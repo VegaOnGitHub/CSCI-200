@@ -1,9 +1,7 @@
 #include "Warehouse.h"
 
-
-template<typename T>
 Warehouse::Warehouse() {
-    _pItems = new std::vector<T*>;
+    _pItems = new std::vector<Box*>;
 }
 
 Warehouse::~Warehouse() {
@@ -14,24 +12,23 @@ Warehouse::~Warehouse() {
     delete _pItems;
 }
 
-template<typename T>
-void Warehouse<T>::store(const T ITEM) {
-    _pItems->push_back( new T(ITEM) );
+void Warehouse::store(const int ITEM) {
+    _pItems->push_back( new Box(ITEM) );
 }
 
-T& Warehouse<T>::retrieve(const size_t ITEM_POS) const {
+Box& Warehouse::retrieve(const size_t ITEM_POS) const {
     return *(_pItems->at(ITEM_POS));
 }
 
-size_t Warehouse<T>::getNumberOfItems() const {
+size_t Warehouse::getNumberOfItems() const {
     return _pItems->size();
 }
 
-char Warehouse<T>::getWarehouseLetter() const {
+char Warehouse::getWarehouseLetter() const {
     return _warehouseLetter;
 }
 
-void Warehouse<T>::setWarehouseLetter(const char warehouseLetter) {
+void Warehouse::setWarehouseLetter(const char warehouseLetter) {
     _warehouseLetter = warehouseLetter;
 }
 
