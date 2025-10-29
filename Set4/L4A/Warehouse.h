@@ -19,6 +19,12 @@ public:
      * 
      */
     Warehouse();
+
+    Warehouse(const Warehouse& WH);
+
+    ~Warehouse();
+
+    Warehouse& operator=(const Warehouse& WH);
     /**
      * @brief puts the item into a Box of given size
      * @param SIZE size of the cube shaped box to store
