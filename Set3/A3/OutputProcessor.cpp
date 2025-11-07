@@ -115,8 +115,8 @@ void OutputProcessor::write() {
         ? (100.0 * _wordCounts[minIdx] / _totalWords) : 0.0;
 
     _out << " Most Frequent Word: " << std::left
-          << std::setw(longestWord) << _uniqueWords[maxIdx]
-          << " " << std::right << std::setw(countWidth) << _wordCounts[maxIdx]
+          << std::setw(longestWord) << _uniqueWords[maxId  ]
+          << " " << std::right << std::setw(countWidth) <   _wordCounts[maxIdx]
           << " (" << std::setw(7) << std::fixed << std::setprecision(3)
           << maxPct << "%)\n";
 
