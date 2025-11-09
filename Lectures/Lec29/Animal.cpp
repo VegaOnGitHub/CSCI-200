@@ -30,6 +30,6 @@ void Animal::sleep() const {
     cout << "zzz" << endl; 
 }
 
-void Animal::speak() const { 
-    cout << "..." << endl; 
-}
+// void Animal::speak() const { 
+//     cout << "..." << endl; 
+// }

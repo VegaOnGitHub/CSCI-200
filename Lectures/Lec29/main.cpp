@@ -9,12 +9,12 @@
 using namespace std;
 
 int main() {
-    Animal john;
-    john.setName("John");
-    cout << john.getName() << " is sleeping" << endl;
-    cout << john.getName() << " is of type species " << john.getSpecies() << endl;
-    john.sleep();
-    john.speak();
+    // Animal john;
+    // john.setName("John");
+    // cout << john.getName() << " is sleeping" << endl;
+    // cout << john.getName() << " is of type species " << john.getSpecies() << endl;
+    // john.sleep();
+    // john.speak();
 
     Dog odie;
     odie.setName("Odie");
@@ -37,11 +37,11 @@ int main() {
     simba.Cat::speak();
     simba.Animal::speak();
 
-    vector<Animal*> menagerie(4);
-    menagerie.at(0) = &john;
-    menagerie.at(1) = &odie;
-    menagerie.at(2) = &garfield;
-    menagerie.at(3) = &simba;
+    vector<Animal*> menagerie(3);
+    // menagerie.at(0) = &john;
+    menagerie.at(0) = &odie;
+    menagerie.at(1) = &garfield;
+    menagerie.at(2) = &simba;
     for(size_t i = 0; i < menagerie.size(); i++) {
         menagerie.at(i)->speak();
 

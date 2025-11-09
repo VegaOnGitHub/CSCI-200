@@ -11,7 +11,7 @@ public:
     void setName(std::string NAME);
     std::string getSpecies() const;
     void sleep() const;
-    virtual void speak() const;
+    virtual void speak() const = 0;
 protected:
     std::string mSpecies;
 private:
