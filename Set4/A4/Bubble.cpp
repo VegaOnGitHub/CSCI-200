@@ -53,7 +53,7 @@ void Bubble::updatePosition(float windowW, float windowH) {
     }
 }
 
-bool bubble::checkClicked(float mouseX, float mouseY) const {
+bool Bubble::checkClicked(float mouseX, float mouseY) const {
     sf::Vector2f pos = bubble.getPosition();
     float r = bubble.getRadius();
     float cx = pos.x + r;
