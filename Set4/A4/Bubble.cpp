@@ -65,8 +65,8 @@ bool Bubble::checkClicked(float mouseX, float mouseY) const {
     return dist2 <= r*r;
 }
 
-sf::Vector2f Bubble::getPos() const {
-    return bubble.getPosition;
+sf::Vector2f Bubble::getPosition() const {
+    return bubble.getPosition();
 }
 
 float Bubble::getRadius() const {
@@ -77,7 +77,7 @@ void Bubble::setColor(sf::Color RBG) {
     bubble.setFillColor(RBG);
 }
 
-void Bubble::setDiretion(sf::Vector2f dir){
+void Bubble::setDirection(sf::Vector2f dir){
     xDir = dir.x;
     yDir = dir.y;
 }
