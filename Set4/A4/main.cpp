@@ -95,8 +95,18 @@ int main() {
                     window.close();
                 }
             }
+
+            if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+                if(mb->button == sf::Mouse::Button::Left){
+                    const float mx = static_cast<float>(mb->position.x);
+                    const float my = static_cast<float>(mb->position.y);
+                    bubbles.erase(
+                        std::remove_if(bubbles.begin(), bubbles.end(), [&](const Bubble& b) { return b.checkClicked(mx, my); }),
+                        bubbles.end()
+                    );
+                }
+            }
         }
-        if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>())
         //  END  EVENT HANDLING HERE
         /////////////////////////////////////
 
