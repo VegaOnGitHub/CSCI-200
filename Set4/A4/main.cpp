@@ -6,6 +6,7 @@
 #include <optional>
 #include <algorithm>
 #include <cmath>
+#include <string>
 
 int main() {
     // create a window
@@ -19,12 +20,11 @@ int main() {
     std::random_device rd;
     std::mt19937 rng(rd());
     std::uniform_real_distribution<float> radiusDist(10.f, 50.f);
-    std::uniform_real_distribution<float> speedDist(-0.8f, 0.8f);
+    std::uniform_real_distribution<float> speedDist(-5.f, 5.f);
     std::uniform_int_distribution<int> colorDist(0, 255);
 
     auto randomNonZeroSpeed = [&](float low, float high) {
         float v = 0.f;
-        //ensuring its not near zero so it actually moves
         do { v = speedDist(rng); } while (std::abs(v) < 0.05f);
         return v;
     };
@@ -37,7 +37,7 @@ int main() {
         std::uniform_real_distribution<float> yPos(0.f, WINDOW_H - diameter);
 
         sf::Vector2f pos{xPos(rng), yPos(rng)};
-        sf::Vector2f dir{randomNonZeroSpeed(-0.8f, 0.8f), randomNonZeroSpeed(-0.8f, 0.8f)};
+        sf::Vector2f dir{randomNonZeroSpeed(-5.f, 5.f), randomNonZeroSpeed(5.f, 5.f)};
         sf::Color color(colorDist(rng), colorDist(rng), colorDist(rng));
 
         return Bubble(r, pos, dir, color);
@@ -49,13 +49,43 @@ int main() {
         bubbles.push_back(makeRandomBubble());
     }
 
-    sf::Clock clock;
+    int score = 0;
+    const float GAME_DURATION_SEC = 10.f;
+    float timeRemaining = GAME_DURATION_SEC;
+    bool gameActive = true;
+
+    sf::Clock frameClock;
+    sf::Clock gameClock;
     sf::Time accumulator = sf::Time::Zero;
     const sf::Time dt = sf::seconds(1.f / 60.f);
     /////////////////////////////////////
     // BEGIN ANY FILE LOADING
 
     // perform any file processing once before draw loop begins
+    sf::Font font;
+    if (!font.openFromFile("data/arial.ttf")) {
+        std::cerr << "Failed to load font\n";
+        return 1;
+    }
+
+    sf::Text scoreText(font, "", 22);
+    scoreText.setFillColor(sf::Color::White);
+    scoreText.setPosition({10.f, 10.f});
+
+    sf::Text bubbleCountText(font, "", 22);
+    bubbleCountText.setFillColor(sf::Color::White);
+    bubbleCountText.setPosition({10.f, 40.f});
+
+    sf::Text timerText(font, "", 22);
+    timerText.setFillColor(sf::Color::White);
+    timerText.setPosition({10.f, 70.f});
+
+    auto updateHud = [&]() {
+        scoreText.setString("Score: " + std::to_string(score));
+        bubbleCountText.setString("Bubbles: " + std::to_string(bubbles.size()));
+        int displaySeconds = static_cast<int>(std::ceil(timeRemaining));
+        timerText.setString("Time: " + std::to_string(displaySeconds));
+    };
 
     //  END  ANY FILE LOADING
     /////////////////////////////////////
@@ -66,11 +96,23 @@ int main() {
         // clear any existing contents
         window.clear();
 
+        if (gameActive) {
+            timeRemaining = std::max(0.f, GAME_DURATION_SEC - gameClock.getElapsedTime().asSeconds());
+            if (timeRemaining <= 0.f) {
+                timeRemaining = 0.f;
+                gameActive = false;
+            }
+        }
+        updateHud();
+
         /////////////////////////////////////
         // BEGIN DRAWING HERE
         for (auto& b : bubbles){
             b.draw(window);
         }
+        window.draw(scoreText);
+        window.draw(bubbleCountText);
+        window.draw(timerText);
 
         // place any draw commands here to display in the window
 
@@ -94,16 +136,21 @@ int main() {
                 if (key->code == sf::Keyboard::Key::Escape || key->code == sf::Keyboard::Key::Q){
                     window.close();
                 }
+                if (gameActive && key->code == sf::Keyboard::Key::Space){
+                    bubbles.push_back(makeRandomBubble());
+                }
             }
 
             if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
-                if(mb->button == sf::Mouse::Button::Left){
+                if(gameActive && mb->button == sf::Mouse::Button::Left){
                     const float mx = static_cast<float>(mb->position.x);
                     const float my = static_cast<float>(mb->position.y);
+                    const std::size_t before = bubbles.size();
                     bubbles.erase(
                         std::remove_if(bubbles.begin(), bubbles.end(), [&](const Bubble& b) { return b.checkClicked(mx, my); }),
                         bubbles.end()
                     );
+                    score += static_cast<int>(before - bubbles.size());
                 }
             }
         }
@@ -112,12 +159,17 @@ int main() {
 
         /////////////////////////////////////
         // BEGIN ANIMATION UPDATING HERE
-        accumulator += clock.restart();
-        while (accumulator >= dt){
-            for (auto& b : bubbles){
-                b.updatePosition(static_cast<float>(WINDOW_H), static_cast<float>(WINDOW_W));
+        if (gameActive) {
+            accumulator += frameClock.restart();
+            while (accumulator >= dt){
+                for (auto& b : bubbles){
+                    b.updatePosition(static_cast<float>(WINDOW_H), static_cast<float>(WINDOW_W));
+                }
+                accumulator -= dt;
             }
-            accumulator -= dt;
+        } else {
+            frameClock.restart();
+            accumulator = sf::Time::Zero;
         }
 
         //  END  ANIMATION UPDATING HERE
