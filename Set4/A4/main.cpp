@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <cmath>
 #include <string>
+#include <functional>
 
 int main() {
     // create a window
@@ -23,13 +24,13 @@ int main() {
     std::uniform_real_distribution<float> speedDist(-5.f, 5.f);
     std::uniform_int_distribution<int> colorDist(0, 255);
 
-    auto randomNonZeroSpeed = [&](float low, float high) {
+    const std::function<float(float, float)> randomNonZeroSpeed = [&](float [[maybe_unused]] low, float [[maybe_unused]] high) -> float {
         float v = 0.f;
         do { v = speedDist(rng); } while (std::abs(v) < 0.05f);
         return v;
     };
 
-    auto makeRandomBubble = [&]() {
+    const std::function<Bubble()> makeRandomBubble = [&]() -> Bubble {
         float r = radiusDist(rng);
         float diameter = 2.f * r;
 
@@ -80,7 +81,7 @@ int main() {
     timerText.setFillColor(sf::Color::White);
     timerText.setPosition({10.f, 70.f});
 
-    auto updateHud = [&]() {
+    const std::function<void()> updateHud = [&]() {
         scoreText.setString("Score: " + std::to_string(score));
         bubbleCountText.setString("Bubbles: " + std::to_string(bubbles.size()));
         int displaySeconds = static_cast<int>(std::ceil(timeRemaining));
@@ -107,7 +108,7 @@ int main() {
 
         /////////////////////////////////////
         // BEGIN DRAWING HERE
-        for (auto& b : bubbles){
+        for (Bubble& b : bubbles){
             b.draw(window);
         }
         window.draw(scoreText);
@@ -132,7 +133,7 @@ int main() {
                 window.close();
             }
             // check additional event types to handle additional events
-            if (const auto* key = event->getIf<sf::Event::KeyPressed>()){
+            if (const sf::Event::KeyPressed* key = event->getIf<sf::Event::KeyPressed>()){
                 if (key->code == sf::Keyboard::Key::Escape || key->code == sf::Keyboard::Key::Q){
                     window.close();
                 }
@@ -141,7 +142,7 @@ int main() {
                 }
             }
 
-            if (const auto* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
+            if (const sf::Event::MouseButtonPressed* mb = event->getIf<sf::Event::MouseButtonPressed>()) {
                 if(gameActive && mb->button == sf::Mouse::Button::Left){
                     const float mx = static_cast<float>(mb->position.x);
                     const float my = static_cast<float>(mb->position.y);
@@ -162,7 +163,7 @@ int main() {
         if (gameActive) {
             accumulator += frameClock.restart();
             while (accumulator >= dt){
-                for (auto& b : bubbles){
+                for (Bubble& b : bubbles){
                     b.updatePosition(static_cast<float>(WINDOW_H), static_cast<float>(WINDOW_W));
                 }
                 accumulator -= dt;
