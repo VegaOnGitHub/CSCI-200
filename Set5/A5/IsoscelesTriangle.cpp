@@ -1,4 +1,4 @@
-#include "Isosceles.hpp"
+#include "IsoscelesTriangle.h"
 
 #include <cmath>
 

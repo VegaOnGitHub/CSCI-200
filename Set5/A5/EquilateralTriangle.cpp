@@ -1,4 +1,4 @@
-#include "EquailateralTriangle.h"
+#include "EquilateralTriangle.h"
 
 #include <cmath>
 

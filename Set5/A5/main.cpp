@@ -11,8 +11,8 @@
 #include <string>
 #include <vector>
 
-#include "EquailateralTriangle.h"
-#include "Isosceles.hpp"
+#include "EquilateralTriangle.h"
+#include "IsoscelesTriangle.h"
 #include "Rhombus.h"
 #include "ScaleneTriangle.h"
 
