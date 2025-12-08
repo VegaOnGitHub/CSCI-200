@@ -11,9 +11,10 @@ REZ_FILES = mazePack
 # YOUR USERNAME
 USERNAME = Daniel_Vega
 
-# SFML configuration (override these on the make command line if your install lives elsewhere)
-SFML_LIB_DIR ?= /opt/homebrew/lib
-SFML_INC_DIR ?= /opt/homebrew/include
+# SFML configuration (override on the command line if installed elsewhere)
+# Default include/lib paths now point to /usr/local
+SFML_LIB_DIR ?= /usr/local/lib
+SFML_INC_DIR ?= /usr/local/include
 
 # NO EDITS BELOW THIS LINE
 CXX = g++
