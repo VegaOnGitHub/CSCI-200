@@ -9,6 +9,8 @@ SFML_SRC_FILES = sfml_main.cpp board.cpp piece.cpp
 
 # HEADERS
 H_FILES = board.h game.h piece.h position.h
+# README
+README_FILE = README
 
 # ANY OTHER RESOURCES FILES THAT ARE PART OF THE PROJECT
 REZ_FILES =
@@ -79,8 +81,9 @@ submission:
 	@echo "...Zipping source files:   $(CLI_SRC_FILES) $(SFML_SRC_FILES)..."
 	@echo "...Zipping header files:   $(H_FILES) ..."
 	@echo "...Zipping resource files: $(REZ_FILES)..."
+	@echo "...Zipping README..."
 	@echo "...Zipping Makefile..."
-	$(ZIPPER) $(ZIP_NAME) $(CLI_SRC_FILES) $(SFML_SRC_FILES) $(H_FILES) $(REZ_FILES) Makefile
+	$(ZIPPER) $(ZIP_NAME) $(CLI_SRC_FILES) $(SFML_SRC_FILES) $(H_FILES) $(REZ_FILES) $(README_FILE) Makefile
 	@echo "...$(ZIP_NAME) done!"
 
 .PHONY: all clean depend submission
