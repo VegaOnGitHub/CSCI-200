@@ -13,7 +13,7 @@ H_FILES = board.h game.h piece.h position.h
 README_FILE = README
 
 # ANY OTHER RESOURCES FILES THAT ARE PART OF THE PROJECT
-REZ_FILES =
+REZ_FILES = final.txt
 
 # YOUR USERNAME
 USERNAME = Daniel_Vega

@@ -1,0 +1,42 @@
+TITLE:
+Daniel Vega, CSCI 200 - Chess Final Project (Console + SFML UI)
+
+PROBLEM DESCRIPTION:
+Build a playable chess program that supports both a terminal interface and a lightweight SFML board UI.
+The game must track legal chess movement, enforce turn order, detect check/stalemate/checkmate, and allow basic persistence of game history.
+The UI should let users start or end a game and move pieces on a visual board.
+
+PROGRAM DOCUMENTATION:
+Build the console game: `make Chess_FP_cli` (default `make` builds both).
+Run with `./Chess_FP_cli` for the text version. 
+Build the SFML UI: `make Chess_FP` (requires SFML dev libraries; defaults to /usr/local include/lib). 
+Run with `./Chess_FP` for the visual board. Console controls are text commands like `e2 e4`, plus `save <file>`, `load <file>`, `history`, `help`, and `quit`. 
+SFML controls are mouse-driven: click “Start Game” to reset, click a piece of the current color, then click a destination to attempt a move; “End Game” clears the board. 
+Possible extensions include PGN import/export, timers, move highlighting, undo/redo, full rules (castling, en passant, promotion choice), and AI opponents. 
+The main change from the original idea is simplifying special-move rules and focusing on core legality plus two UIs to fit time constraints.
+
+CLASS DESCRIPTION:
+Custom class `Board` encapsulates the 8x8 grid of `Piece` objects, move validation, check/stalemate detection, serialization, and printing. 
+`Piece` and its derived types (Pawn, Knight, Bishop, Rook, Queen, King) encapsulate movement/attack rules. 
+Encapsulation keeps rule logic localized and lets both UIs share the same engine cleanly.
+
+LIST DATA STRUCTURE:
+The board uses a 2D `std::vector` of `std::unique_ptr<Piece>` to manage ownership and easy indexed access. 
+A `std::vector` move history is kept for logging/saving. 
+Vectors were chosen for cache-friendly indexed lookups and straightforward traversal of fixed-size boards.
+
+FILE I/O:
+File I/O is used to save/load game state (whose turn, board layout, move history) in the console version, and to log moves automatically to a text file. 
+It enables pausing/resuming games and auditing moves.
+
+PROJECT MODIFICATIONS:
+Special moves (castling, en passant, promotion choice) were deferred to deliver a stable core ruleset with dual UIs in the available time. 
+The SFML UI was added as an extra deliverable; it focuses on simple click-to-move without advanced validation feedback beyond “illegal move.” 
+Persistence is limited to the console flow. These changes kept scope realistic while meeting gameplay and visualization goals.
+
+REFLECTIONS:
+The project reinforced separating game logic from presentation: a single board/engine serves both terminal and SFML fronts. 
+Challenges included enforcing legality without special-move edge cases and keeping the UI responsive while validating moves. 
+With more time, I would harden rule coverage (castling, en passant, promotion selection), add undo/redo, 
+improve UI feedback (highlight legal moves, show check states), and standardize save formats (PGN/FEN). 
+The exercise clarified the value of small, testable logic units before layering UI.

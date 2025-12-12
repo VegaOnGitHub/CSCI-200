@@ -1,4 +1,8 @@
-I have 2 seperate builds
+There are 2 seperate builds
 
 Chess_FP is the SFML Version of Chess
 Chess_FP_cli is the terminal Version of Chess
+
+If your grading this please grade the Chess_FP_cli due to it being able to input and output txt files for saving and resuming a game.
+the Chess_FP_cli, was kind of a failed attempt to try to make a UI for the game instead of just having a terminal game.
+
